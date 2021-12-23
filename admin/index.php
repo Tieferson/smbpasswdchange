@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['admin'] = $_SESSION['admin'] ?? false;
 
-$conf = parse_ini_file(".conf");
+$conf = parse_ini_file("../.conf");
 
 $admin = $_POST['admin'] ?? null;
 $user = $_POST['user'] ?? null;
@@ -67,7 +67,7 @@ if ($_SESSION['admin'] && !empty($user)) {
             <div class="col-xs-4 col-md-6">
 
                 <form class='bg-white py-5 px-5 rounded-3' action="?" method="post">
-                    <h1 class='fs-2 text-center'><?php=$conf['serverName'] ?></h1>
+                    <h1 class='fs-2 text-center'><?=$conf['serverName'] ?></h1>
                     <h2 class='fs-4 text-center mb-5'>Admin de usuários</h2>
                     <?php
                     if (!$_SESSION['admin']) {
@@ -121,7 +121,7 @@ if ($_SESSION['admin'] && !empty($user)) {
                     }
                     ?>
 
-                    <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="https://www.octio.com.br"> Octio Tecnologia</a></p>
+                    <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="<?=$conf['siteURL'] ?>"><?=$conf['siteName'] ?></a></p>
 
 
                 </form>

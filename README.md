@@ -30,3 +30,6 @@ Adicione as linhas seguintes para que o Apache consiga alterar a senha dos usuá
 
 `www-data ALL=(ALL) NOPASSWD: /usr/bin/smbpasswd`
 `www-data ALL=(ALL) NOPASSWD: /usr/bin/pdbedit`
+
+
+Altere o arquivo .conf de acordo com suas necessidades

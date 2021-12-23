@@ -8,10 +8,10 @@ $message = '';
 
 
 
-if(isset($user) && strlen($newpassword)<6){
-    $newpassword=null;
+if (isset($user) && strlen($newpassword) < 6) {
+    $newpassword = null;
     $message = "A nova senha deve possuir ao menos 6 caracteres";
-    $result=0;
+    $result = 0;
 }
 
 if (!empty($user) && !empty($password) && !empty($newpassword)) {
@@ -45,7 +45,7 @@ if (!empty($user) && !empty($password) && !empty($newpassword)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redefinição de senha | <?=$conf['serverName'] ?></title>
+    <title>Redefinição de senha | <?= $conf['serverName'] ?></title>
     <link rel="stylesheet" href="libs/css/bootstrap.min.css">
     <style>
         body,
@@ -61,11 +61,11 @@ if (!empty($user) && !empty($password) && !empty($newpassword)) {
             <div class="col-xs-4 col-md-6">
 
                 <form class='bg-white pb-3 pt-5 px-5 rounded-3' action="?" method="post">
-                    <h1 class='fs-2 text-center'><?=$conf['serverName'] ?></h1>
+                    <h1 class='fs-2 text-center'><?= $conf['serverName'] ?></h1>
                     <h2 class='fs-4 text-center mb-5'>Alteração de senha</h2>
                     <div class="form-group mb-4">
                         <label for="">Usuário</label>
-                        <input required type="text" class="form-control" name="user" id="user" aria-describedby="helpId" placeholder="Seu nome de usuário" value='<?= !empty($user)?$user:'' ?>'>
+                        <input required type="text" class="form-control" name="user" id="user" aria-describedby="helpId" placeholder="Seu nome de usuário" value='<?= !empty($user) ? $user : '' ?>'>
                     </div>
                     <div class="form-group mb-4">
                         <label for="">Senha atual</label>
@@ -93,7 +93,7 @@ if (!empty($user) && !empty($password) && !empty($newpassword)) {
                     }
                     ?>
 
-                    <p class='small text-center' style='color:#999'>&copy;<?=date('Y')?> - <a href="https://www.octio.com.br"> Octio Tecnologia</a></p>
+                    <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="<?= $conf['siteURL'] ?>"><?= $conf['siteName'] ?></a></p>
 
 
                 </form>
