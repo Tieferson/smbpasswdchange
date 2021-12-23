@@ -51,7 +51,7 @@ if ($_SESSION['admin'] && !empty($user)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redefinição de senha de usuários | <?= $conf['serverName'] ?></title>
+    <title>Redefinição de senha de usuários | <?=$conf['serverName'] ?></title>
     <link rel="stylesheet" href="../libs/css/bootstrap.min.css">
     <style>
         body,
@@ -68,7 +68,7 @@ if ($_SESSION['admin'] && !empty($user)) {
 
                 <form class='bg-white py-5 px-5 rounded-3' action="?" method="post">
                     <h1 class='fs-2 text-center'><?php=$conf['serverName'] ?></h1>
-                    <h2 class='fs-4 text-center mb-5'>Alteração de senha</h2>
+                    <h2 class='fs-4 text-center mb-5'>Admin de usuários</h2>
                     <?php
                     if (!$_SESSION['admin']) {
                     ?>
