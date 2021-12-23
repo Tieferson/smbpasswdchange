@@ -1,18 +1,20 @@
 # PASSWORD CHANGE FOR SAMBA
 
-Administrador para reset de senha do samba.
+Administrador para reset de senhas do samba.
 
 ## AUTOR
 
-Tieferson Leandro Domingos <tiefersond@yahoo.com.br>
+Tieferson Leandro Domingos - <tiefersond@yahoo.com.br>
+
+Caso encontrem falhas ou tenham sugestões ficarei feliz em saber.
 
 ## INSTALAÇÃO
 
-Após instalar o Apache com o PHP no servidor do Samba Acesse a pasta /var/www e clone o projeto.
+Após instalar o Apache com o PHP no servidor do Samba, acesse a pasta /var/www e clone o projeto.
 
 `git clone https://github.com/Tieferson/smbpasswdchange.git`
 
-E altere o arquivo /etc/apache2/sites-enabled/000-default.conf conforme abaixo
+Altere o arquivo /etc/apache2/sites-enabled/000-default.conf conforme abaixo
 
 
 `sudo nano /etc/apache2/sites-enabled/000-default.conf`
@@ -20,11 +22,11 @@ E altere o arquivo /etc/apache2/sites-enabled/000-default.conf conforme abaixo
 
 `DocumentRoot /var/www/smbpasswdchange`
 
-E reinicie o Apache
+Reinicie o Apache
 
 `sudo service apache2 restart`
 
-Adicione as linhas seguintes para que o Apache consiga alterar a senha dos usuários.
+Adicione as linhas seguintes no sudoers para que o Apache consiga alterar a senha dos usuários.
 
 `sudo visudo`
 
