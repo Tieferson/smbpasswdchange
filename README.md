@@ -36,3 +36,23 @@ Adicione as linhas seguintes no sudoers para que o Apache consiga alterar a senh
 
 
 Altere o arquivo .conf de acordo com suas necessidades
+
+# UTILIZAÇÃO
+
+Para um determinado usuário realizar a troca de senha basta acessar o servidor pelo navegador. Ex: http://servidordearquivos.local/
+
+Será exibida e tela abaixo onde o usuário deve informar seu nome de usuário, senha atual e nova senha.
+
+![Change pass screen]()
+
+Caso o usuário não saiba sua senha atual a senha deve ser redefinda pelo administrador que deverá acessar o /admin no servidor de arquivos. Ex: http://servidordearquivos.local/admin
+
+Lembre-se que o administrador deve fazer parte do grupo sudo e deverá utilizar sua senha do samba.
+
+![Admin login]()
+
+Após efetuar o login basta selecionar o usuário que deseja alterar a senha e clicar no botão "Alterar senha". Uma senha aleatória será gerada.
+
+![Admin Reset Passwd]()
+
+IMPORTANTE: Este processo altera apenas a senha do samba, não modificando a senha do Linux.
