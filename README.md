@@ -43,16 +43,16 @@ Para um determinado usuário realizar a troca de senha basta acessar o servidor 
 
 Será exibida e tela abaixo onde o usuário deve informar seu nome de usuário, senha atual e nova senha.
 
-![Change pass screen]()
+![Change pass screen](https://github.com/Tieferson/smbpasswdchange/blob/main/screenshots/user-pass-reset.png)
 
 Caso o usuário não saiba sua senha atual a senha deve ser redefinda pelo administrador que deverá acessar o /admin no servidor de arquivos. Ex: http://servidordearquivos.local/admin
 
 Lembre-se que o administrador deve fazer parte do grupo sudo e deverá utilizar sua senha do samba.
 
-![Admin login]()
+![Admin login](https://github.com/Tieferson/smbpasswdchange/blob/main/screenshots/admin-login.png)
 
 Após efetuar o login basta selecionar o usuário que deseja alterar a senha e clicar no botão "Alterar senha". Uma senha aleatória será gerada.
 
-![Admin Reset Passwd]()
+![Admin Reset Passwd](https://github.com/Tieferson/smbpasswdchange/blob/main/screenshots/admin-user-reset-pass.png)
 
 IMPORTANTE: Este processo altera apenas a senha do samba, não modificando a senha do Linux.
