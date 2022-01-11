@@ -1,7 +1,6 @@
 <?php
 session_start();
 $_SESSION['admin'] = $_SESSION['admin'] ?? false;
-$_SESSION['admin'] = true;
 
 $conf = parse_ini_file("../.conf");
 
@@ -16,13 +15,13 @@ if (isset($_GET['logout'])) {
     $_SESSION['admin'] = false;
 }elseif ($_SESSION['admin'] && isset($_GET['restartsamba'])) {
     exec("sudo /etc/init.d/smbd restart", $out, $result);
-    var_dump($out,$result);
+    $message = $result === 1?"Erro ao reiciar o serviço":"Serviço reiniciado com sucesso";
 }elseif ($_SESSION['admin'] && isset($_GET['reboot'])) {
     exec("sudo /usr/sbin/reboot -f", $out, $result);
-    var_dump($out,$result);
+    $message = $result === 1?"Erro ao reiciar o servidor":"Aguarde enquanto o servidor é reiniciado";
 }elseif ($_SESSION['admin'] && isset($_GET['shutdown'])) {
     exec("/usr/sbin/halt -p -f", $out, $result);
-    var_dump($out,$result);
+    $message = $result === 1?"Erro ao desligar o servidor":"Aguarde enquanto o servidor é desligado";
 }
 
 
