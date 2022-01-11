@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['admin'] = $_SESSION['admin'] ?? false;
+$_SESSION['admin'] = true;
 
 $conf = parse_ini_file("../.conf");
 
@@ -11,9 +12,20 @@ $newpassword = $_POST['newpassword'] ?? null;
 $result = null;
 $message = '';
 
-if(isset($_GET['logout'])){
+if (isset($_GET['logout'])) {
     $_SESSION['admin'] = false;
+}elseif ($_SESSION['admin'] && isset($_GET['restartsamba'])) {
+    exec("sudo /etc/init.d/smbd restart", $out, $result);
+    var_dump($out,$result);
+}elseif ($_SESSION['admin'] && isset($_GET['reboot'])) {
+    exec("sudo /usr/sbin/reboot -f", $out, $result);
+    var_dump($out,$result);
+}elseif ($_SESSION['admin'] && isset($_GET['shutdown'])) {
+    exec("/usr/sbin/halt -p -f", $out, $result);
+    var_dump($out,$result);
 }
+
+
 
 if (!empty($admin) && !empty($password)) {
     exec("(echo '$password'; echo '$password') | smbclient -L //localhost -U $admin", $out, $result);
@@ -24,10 +36,10 @@ if (!empty($admin) && !empty($password)) {
         $message = "Credenciais de acesso inválidas!";
     } else {
         exec("groups $admin", $out3);
-        if(strpos($out3[0],"sudo")){
+        if (strpos($out3[0], "sudo")) {
             $_SESSION['admin'] = true;
             $result = null;
-        }else{
+        } else {
             $message = "O usuário admin deve pertencer ao grupo sudo!";
             $result = 1;
         }
@@ -35,7 +47,7 @@ if (!empty($admin) && !empty($password)) {
 }
 
 if ($_SESSION['admin'] && !empty($user)) {
-    $newpassword = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789"),0,8);
+    $newpassword = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789"), 0, 8);
     exec("(echo '$newpassword'; echo '$newpassword') | sudo smbpasswd -a $user", $out2, $result);
     if ($result === 0) {
         $message = "A nova senha do usuário <b>$user</b> é <b>$newpassword</b>";
@@ -51,7 +63,7 @@ if ($_SESSION['admin'] && !empty($user)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redefinição de senha de usuários | <?=$conf['serverName'] ?></title>
+    <title>Redefinição de senha de usuários | <?= $conf['serverName'] ?></title>
     <link rel="stylesheet" href="../libs/css/bootstrap.min.css">
     <style>
         body,
@@ -67,8 +79,7 @@ if ($_SESSION['admin'] && !empty($user)) {
             <div class="col-xs-4 col-md-6">
 
                 <form class='bg-white py-5 px-5 rounded-3' action="?" method="post">
-                    <h1 class='fs-2 text-center'><?=$conf['serverName'] ?></h1>
-                    <h2 class='fs-4 text-center mb-5'>Admin de usuários</h2>
+                    <h1 class='fs-2 text-center'><?= $conf['serverName'] ?></h1>
                     <?php
                     if (!$_SESSION['admin']) {
                     ?>
@@ -87,6 +98,15 @@ if ($_SESSION['admin'] && !empty($user)) {
                     <?php
                     } else {
                     ?>
+                        <h2 class='fs-4 text-center mb-5'>Admin do Servidor</h2>
+                        <div class="form-group mb-4 text-center">
+                            
+                            <a href="?restartsamba" class="btn btn-success">Reiniciar Samba</a>
+                            <a href="?reboot" class="btn btn-primary">Reiniciar Servidor</a>
+                            <a href="?shutdown" class="btn btn-danger">Desligar Servidor</a>
+                        </div>
+                        <hr />
+                        <h2 class='fs-4 text-center mb-5'>Admin de usuários</h2>
                         <div class="form-group mb-4">
                             <label for="">Usuário</label>
                             <select required class="form-select" name="user" id="user" aria-describedby="helpId"'>
@@ -98,10 +118,10 @@ if ($_SESSION['admin'] && !empty($user)) {
                             ?>
                             </select>
                         </div>
-                            <div class="form-group mb-4">
-                                <button type="submit" class="btn btn-primary">Alterar senha</button>
-                                <a href="?logout" class="btn btn-danger">Sair</a>
-                            </div>
+                        <div class="form-group mb-4">
+                            <button type="submit" class="btn btn-primary">Alterar senha</button>
+                            <a href="?logout" class="btn btn-danger">Sair</a>
+                        </div>
                        
                     <?php
                     }
@@ -121,7 +141,7 @@ if ($_SESSION['admin'] && !empty($user)) {
                     }
                     ?>
 
-                    <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="<?=$conf['siteURL'] ?>"><?=$conf['siteName'] ?></a></p>
+                    <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="<?= $conf['siteURL'] ?>"><?= $conf['siteName'] ?></a></p>
 
 
                 </form>
