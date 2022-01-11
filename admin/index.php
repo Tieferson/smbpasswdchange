@@ -17,9 +17,11 @@ if (isset($_GET['logout'])) {
     exec("sudo /etc/init.d/smbd restart", $out, $result);
     $message = $result === 1 ? "Erro ao reiciar o serviço" : "Serviço reiniciado com sucesso";
 } elseif ($_SESSION['admin'] && isset($_GET['reboot'])) {
+    header("Location: ?");
     exec("sudo /usr/sbin/reboot -f", $out, $result);
     $message = $result === 1 ? "Erro ao reiciar o servidor" : "Aguarde enquanto o servidor é reiniciado";
 } elseif ($_SESSION['admin'] && isset($_GET['shutdown'])) {
+    header("Location: ?");
     exec("sudo /usr/sbin/halt -p -f", $out, $result);
     $message = $result === 1 ? "Erro ao desligar o servidor" : "Aguarde enquanto o servidor é desligado";
 }
