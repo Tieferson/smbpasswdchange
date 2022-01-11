@@ -13,15 +13,15 @@ $message = '';
 
 if (isset($_GET['logout'])) {
     $_SESSION['admin'] = false;
-}elseif ($_SESSION['admin'] && isset($_GET['restartsamba'])) {
+} elseif ($_SESSION['admin'] && isset($_GET['restartsamba'])) {
     exec("sudo /etc/init.d/smbd restart", $out, $result);
-    $message = $result === 1?"Erro ao reiciar o serviço":"Serviço reiniciado com sucesso";
-}elseif ($_SESSION['admin'] && isset($_GET['reboot'])) {
+    $message = $result === 1 ? "Erro ao reiciar o serviço" : "Serviço reiniciado com sucesso";
+} elseif ($_SESSION['admin'] && isset($_GET['reboot'])) {
     exec("sudo /usr/sbin/reboot -f", $out, $result);
-    $message = $result === 1?"Erro ao reiciar o servidor":"Aguarde enquanto o servidor é reiniciado";
-}elseif ($_SESSION['admin'] && isset($_GET['shutdown'])) {
+    $message = $result === 1 ? "Erro ao reiciar o servidor" : "Aguarde enquanto o servidor é reiniciado";
+} elseif ($_SESSION['admin'] && isset($_GET['shutdown'])) {
     exec("sudo /usr/sbin/halt -p -f", $out, $result);
-    $message = $result === 1?"Erro ao desligar o servidor":"Aguarde enquanto o servidor é desligado";
+    $message = $result === 1 ? "Erro ao desligar o servidor" : "Aguarde enquanto o servidor é desligado";
 }
 
 
@@ -99,10 +99,10 @@ if ($_SESSION['admin'] && !empty($user)) {
                     ?>
                         <h2 class='fs-4 text-center mb-5'>Admin do Servidor</h2>
                         <div class="form-group mb-4 text-center">
-                            
+
                             <a href="?restartsamba" class="btn btn-success">Reiniciar Samba</a>
-                            <a href="?reboot" class="btn btn-primary">Reiniciar Servidor</a>
-                            <a href="?shutdown" class="btn btn-danger">Desligar Servidor</a>
+                            <a href="javascript: void(0)" onclick="if(confirm('Deseja mesmo reiniciar o servidor?')){window.location.href='?reboot'}" class="btn btn-primary">Reiniciar Servidor</a>
+                            <a href="javascript: void(0)" onclick="if(confirm('Deseja mesmo desligar o servidor?')){window.location.href='?shutdown'}" class="btn btn-danger">Desligar Servidor</a>
                         </div>
                         <hr />
                         <h2 class='fs-4 text-center mb-5'>Admin de usuários</h2>
@@ -126,21 +126,22 @@ if ($_SESSION['admin'] && !empty($user)) {
                     }
                     ?>  
                     
+                    <div class='message'>
 
-                    <?php
-                    if ($result === 0) {
-                        echo "<div class='alert alert-success' role='alert'>
+                                <?php
+                                if ($result === 0) {
+                                    echo "<div class='alert alert-success' role='alert'>
                 $message
               </div>";
-                    }
-                    if ($result === 1) {
-                        echo "<div class='alert alert-danger' role='alert'>
+                                }
+                                if ($result === 1) {
+                                    echo "<div class='alert alert-danger' role='alert'>
                 $message
               </div>";
-                    }
-                    ?>
-
-                    <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="<?= $conf['siteURL'] ?>"><?= $conf['siteName'] ?></a></p>
+                                }
+                                ?>
+                        </div>
+                        <p class=' small text-center' style='color:#999'>&copy;<?= date('Y') ?> - <a href="<?= $conf['siteURL'] ?>"><?= $conf['siteName'] ?></a></p>
 
 
                 </form>
