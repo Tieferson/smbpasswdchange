@@ -20,7 +20,7 @@ if (isset($_GET['logout'])) {
     exec("sudo /usr/sbin/reboot -f", $out, $result);
     $message = $result === 1?"Erro ao reiciar o servidor":"Aguarde enquanto o servidor é reiniciado";
 }elseif ($_SESSION['admin'] && isset($_GET['shutdown'])) {
-    exec("/usr/sbin/halt -p -f", $out, $result);
+    exec("sudo /usr/sbin/halt -p -f", $out, $result);
     $message = $result === 1?"Erro ao desligar o servidor":"Aguarde enquanto o servidor é desligado";
 }
 
