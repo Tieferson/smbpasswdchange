@@ -30,6 +30,8 @@ Adicione as linhas seguintes no sudoers para que o Apache consiga alterar a senh
 
 `sudo visudo`
 
+`www-data ALL=(ALL) NOPASSWD: /usr/bin/smbclient`
+
 `www-data ALL=(ALL) NOPASSWD: /usr/bin/smbpasswd`
 
 `www-data ALL=(ALL) NOPASSWD: /usr/bin/pdbedit`

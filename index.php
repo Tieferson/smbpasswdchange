@@ -22,6 +22,8 @@ if (!empty($user) && !empty($password) && !empty($newpassword)) {
         $message = "Erro na comunicação com o servidor";
     } elseif ($result === 0) {
         //Aceitou a autenticação
+        
+        exec("(echo -e \"".$newpassword."\n".$newpassword."\" | sudo passwd $user", $out2, $result);
         exec("(echo '$newpassword'; echo '$newpassword') | sudo smbpasswd -a $user", $out2, $result);
         if ($result === 0) {
             $message = "Senha alterada com sucesso!";
