@@ -23,7 +23,9 @@ if (!empty($user) && !empty($password) && !empty($newpassword)) {
     } elseif ($result === 0) {
         //Aceitou a autenticação
         
-        exec("(echo -e \"".$newpassword."\n".$newpassword."\" | sudo passwd $user", $out2, $result);
+        if($conf['syncUnixPwd']=='yes'){
+            exec("(echo -e \"".$newpassword."\n".$newpassword."\" | sudo passwd $user", $out2, $result);
+        }
         exec("(echo '$newpassword'; echo '$newpassword') | sudo smbpasswd -a $user", $out2, $result);
         if ($result === 0) {
             $message = "Senha alterada com sucesso!";

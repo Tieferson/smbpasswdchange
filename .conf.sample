@@ -1,3 +1,4 @@
 serverName = "SERVIDOR DE ARQUIVOS"
 siteName = "Octio Tecnologia"
 siteURL = "https://www.octio.com.br"
+syncUnixPwd = yes
