@@ -50,8 +50,8 @@ if (!empty($admin) && !empty($password)) {
 if ($_SESSION['admin'] && !empty($user)) {
     $newpassword = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789"), 0, 8);
    
-    if($conf['syncUnixPwd']=='yes'){
-        exec("(echo -e \"".$newpassword."\n".$newpassword."\" | sudo passwd $user", $out2, $result);
+    if($conf['syncUnixPwd']==1){
+        exec("(echo '$newpassword'; echo '$newpassword') | sudo passwd $user", $out2, $result);
     }
     exec("(echo '$newpassword'; echo '$newpassword') | sudo smbpasswd -a $user", $out2, $result);
     if ($result === 0) {

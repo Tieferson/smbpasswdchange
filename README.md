@@ -34,6 +34,8 @@ Adicione as linhas seguintes no sudoers para que o Apache consiga alterar a senh
 
 `www-data ALL=(ALL) NOPASSWD: /usr/bin/smbpasswd`
 
+`www-data ALL=(ALL) NOPASSWD: /usr/bin/passwd`
+
 `www-data ALL=(ALL) NOPASSWD: /usr/bin/pdbedit`
 
 `www-data ALL=(ALL) NOPASSWD: /etc/init.d/smbd`

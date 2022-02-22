@@ -23,8 +23,8 @@ if (!empty($user) && !empty($password) && !empty($newpassword)) {
     } elseif ($result === 0) {
         //Aceitou a autenticação
         
-        if($conf['syncUnixPwd']=='yes'){
-            exec("(echo -e \"".$newpassword."\n".$newpassword."\" | sudo passwd $user", $out2, $result);
+        if($conf['syncUnixPwd']==1){
+            exec("(echo '$newpassword'; echo '$newpassword') | sudo passwd $user", $out2, $result);
         }
         exec("(echo '$newpassword'; echo '$newpassword') | sudo smbpasswd -a $user", $out2, $result);
         if ($result === 0) {
